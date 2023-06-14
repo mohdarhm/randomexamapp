@@ -1,66 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Question Entry</title>
+    <title>Database Updation</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'facportalstyle.css'%}">
-
 </head>
 <body>
-    
-    <h1>Question Entry</h1>
+    <h1>Database Updation</h1>
     <form method="POST" action="">
         {% csrf_token %}
-    
-       
         <label for="subject_id">Subject:</label>
         <select id="subjectDropdown" name="subject_id">
             {% for subject in subjects %}
             <option value="{{ subject.id }}">{{ subject.name }}</option>
             {% endfor %}
+        
         </select>
+        <br><br><br>
         <label for="concept_id">Concept:</label>
         <select id="conceptDropdown" name="concept_id">
-
         </select>
-        
-        
+        <br><br><br>
         <label for="question_text">Question Text:</label>
-        <textarea id="question_text" name="question_text" required></textarea><br>
-
+        <textarea id="question_text" name="question_text" required></textarea><br><br><br>
         <label for="options">Options:</label>
-        <textarea id="options" name="options" required></textarea><br>
-
+        <textarea id="options" name="options" required></textarea><br><br><br>
         <label for="correct_answer">Correct Answer:</label>
-        <input type="text" id="correct_answer" name="correct_answer" required><br>
-
+        <input type="text" id="correct_answer" name="correct_answer" required>
+        <br><br><br>
         <input type="submit" value="Save">
     </form>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-$(document).ready(function() {
-  // Handle change event of subject dropdown
-  $('#subjectDropdown').change(function() {
-    // Get the selected subject ID
-    var subjectId = $(this).val();
-
-    // Filter the concepts based on the selected subject
-    var filteredConcepts = concepts.filter(function(concept) {
-      return concept.subject_id == subjectId;
-    });
-
-    // Clear previous options in concepts dropdown
-    $('#conceptDropdown').empty();
-
-    // Add new options based on the filtered concepts
-    $.each(filteredConcepts, function(index, concept) {
-      $('#conceptDropdown').append('<option value="' + concept.id + '">' + concept.name + '</option>');
-    });
-  });
-});
-</script>
-
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        console.log("hailu");
+        $(document).ready(function() {
+            // Handle the change event of the Subject dropdown
+            $('#subjectDropdown').change(function() {
+                var selectedSubject = $(this).val();
+                console.log("hailu");
+                if (selectedSubject) {
+                    // Make an AJAX request to get the updated concept options
+                    $.ajax({
+                        url: '{% url "faculty_questions:get_concepts" %}',
+                        data: {
+                            'subject': selectedSubject
+                        },
+                        success: function(concepts) {
+                            // Update the options of the Concept dropdown
+                            var conceptDropdown = $('#conceptDropdown');
+                            conceptDropdown.empty();
+                            $.each(concepts, function(key, value) {
+                                conceptDropdown.append($('<option></option>').attr('value', key).text(value.name));
+                            });
+                        }
+                    });
+                }
+            });
+        });
     </script>
-
 </body>
 </html>

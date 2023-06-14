@@ -7,7 +7,7 @@ Frontend= HTML/CSS/Javascript
 Backend DB= relational, MySQL 
 Web Framework= Django
 
-V1.0 -- initial build -14/6/23
+V0.5 -- initial build -14/6/23
 
 -init homepage desgin- light mode and dark mode
 -main exam form showcasing the dynamic rendering of the page

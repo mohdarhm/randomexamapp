@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Examination Page</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+</head>
+<body class="app">
+  <div class="background"></div>
+  
+  <div class="container">
+    <div class="questions-container">
+    <h1>SUIIIIIIIIIIIII</h1>
+    
+    <div class="progress-indicator">Progress: <span id="current-progress">0</span>/<span id="total-questions">0</span></div>
+
+    <form id="exam-form">
+      {% for question in questions %}
+      <div class="question">
+          <h2>{{ question.question_text }}</h2>
+      
+      <div class="options">
+          <form>
+              {% for option in question.options %}
+              <label for="{{ option }}"><input type="radio" id="{{ option }}" name="{{ question.question_text }}" value="{{ option }}">{{ option }}</label>  
+             <br>
+              {% endfor %}
+          </form>
+      </div>
+    </div>
+  
+  {% endfor %}
+  
+
+    <button class="btn" id="btn">Submit</button>
+  </div>
+  
+    <!-- Questions -->
+    <!-- Submit button -->
+  </div>
+  <script {% load static %} src="{% static 'script.js' %}"></script>
+</body>
+</html>

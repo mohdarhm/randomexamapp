@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Examination Page</title>
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+</head>
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <div class="questions-container">
+    <h1>EXAMINATION</h1>
+    
+    <div class="progress">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <form id="exam form">
+    <div class="question">
+      <p>Q1: What is the capital of France?</p>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a">Paris</label>
+        <label><input type="radio" name="q1" value="b">London</label>
+        <label><input type="radio" name="q1" value="c">Berlin</label>
+        <label><input type="radio" name="q1" value="d">Rome</label>
+      </div>
+    </div>
+    
+    <div class="question">
+      <p>Q2: Which planet is known as the Red Planet?</p>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a">a) Mars</label>
+        <label><input type="radio" name="q2" value="b">b) Venustert</label>
+        <label><input type="radio" name="q2" value="c">c) Jupitertter</label>
+        <label><input type="radio" name="q2" value="d">d) Saturn</label>
+      </div>
+    </div>
+    <div class="question">
+      <p>Q3: What is the capital of France?</p>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a">a) Partreteis</label>
+        <label><input type="radio" name="q3" value="b">b) Londfsdon</label>
+        <label><input type="radio" name="q3" value="c">c) Bertretlin</label>
+        <label><input type="radio" name="q3" value="d">d) Romtree</label>
+      </div>
+    </div>
+    
+    <div class="question">
+      <p>Q4: Which planet is known as the Red Planet?</p>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a">a) Mars</label>
+        <label><input type="radio" name="q4" value="b">b) erttre</label>
+        <label><input type="radio" name="q4" value="c">c) ert</label>
+        <label><input type="radio" name="q4" value="d">d) Satreterturn</label>
+      </div>
+    </div>
+    <div class="question">
+      <p>Q5: What is the capital of France?</p>
+      <div class="options">
+        <label><input type="radio" name="q5" value="a">a) Pa5345345ris</label>
+        <label><input type="radio" name="q5" value="b">b) tert</label>
+        <label><input type="radio" name="q5" value="c">c) tertrett</label>
+        <label><input type="radio" name="q5" value="d">d) tertertw4</label>
+      </div>
+    </div>
+    
+    <div class="question">
+      <p>Q6: Which planet is known as the Red Planet?</p>
+      <div class="options">
+        <label><input type="radio" name="q6" value="a">Mars</label>
+        <label><input type="radio" name="q6" value="b">tret</label>
+        <label><input type="radio" name="q6" value="c">tertre</label>
+        <label><input type="radio" name="q6" value="d">Safffgeturn</label>
+      </div>
+    </div>
+    
+    <!-- Add more questions here -->
+  
+
+    <button class="btn">Submit</button>
+  </div>
+  
+    <!-- Questions -->
+    <!-- Submit button -->
+  </div>
+  
+  <div id="warning-container">
+    <p id="warning-message" class="warning">Please answer all the questions.</p>
+  </div>
+  
+</form>
+  <script {% load static %} src="{% static 'script.js' %}"></script>
+</body>
+</html>

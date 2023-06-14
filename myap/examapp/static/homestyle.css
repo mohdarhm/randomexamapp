@@ -1,0 +1,156 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.5s ease-in-out;
+  z-index: 1;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  font-size: larger;
+}
+
+.modal-content ul {
+  list-style-type: none;
+  padding: 0;
+  font-family: Segoe UI light;
+}
+
+.modal-content ul li {
+  margin-bottom: 10px;
+}
+
+.modal-content ul li a {
+  color: #333;
+  text-decoration: none;
+}
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  animation: fade-in 0.5s ease-in-out;
+  z-index: 0;
+}
+
+.modal-background.show {
+  display: block;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* Rest of the CSS code */
+
+
+#background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(219,255,219);
+  background: linear-gradient(96deg, rgba(219,255,219,1) 0%, rgba(251,255,228,1) 100%);  
+  /* background-image: url("hpimg.png"); */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  animation: fade-in 1s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  z-index: 1;
+}
+
+h1 {
+  font-size: 3em;
+  font-family: 'Lato';
+  animation: fade-in 0.8s ease-in-out forwards;
+}
+
+h2 {
+  font-size: 1.2em;
+  font-family: Lato;
+  animation: fade-in 0.8s ease-in-out forwards;
+}
+
+.expand-button {
+  display: inline-block;
+  border-radius: 20px;
+  padding: 20px 20px;
+  font-size: 1em;
+  margin: 10 10px;
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  border: 2px solid #000000;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  animation: fade-in 0.8s ease-in-out forwards;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+.expand-button:hover {
+  padding: 20px 150px;
+}

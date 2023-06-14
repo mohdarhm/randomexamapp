@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load static %}
+  <link id="sex" rel="stylesheet" type="text/css" href="{% static 'debughome.css'%}">
+  <script src="{% static 'debugjs.js'%}"></script>
+</head>
+<body>
+  <div class="maincont">
+ 
+    <div class="con1">
+      <button class="dmode" id="dmode">Dark Mode</button>
+    </div>
+    <div class="con2">
+    
+      <h1>
+        XYZ Portal
+        <br><br><br><br><br> <br><br><br> 
+      </h1>
+      <p>
+        Dear Students/Facuty:<br><br>
+        kindly click on the button below to get started.<br><br><br><br><br><br>
+      </p>
+      <button class="expand-button" id="expand-button">GO</button>
+    </div>
+    <div id="menu-modal" class="modal">
+      <div class="modal-content">
+        <h2>Menu</h2>
+        <ul>
+          <li><a href="{% url 'examportal'%}">Test Portal</a></li>
+          <li><a href="#">Faculty Portal</a></li>
+          <li><a href="{% url 'res'%}">Resources</a></li>
+          <li><a href="{% url 'about'%}">About</a></li>
+        </ul> 
+      </div>
+    </div>
+  </div>
+  <script>
+ const darkModeCSS = "{% static 'debughomedark.css' %}";
+  let isDarkMode = false;
+
+  function toggleMode() {
+    const linkElement = document.getElementById("sex");
+    const bodyElement = document.body;
+
+    if (isDarkMode) {
+      linkElement.href = "{% static 'debughome.css' %}";
+      bodyElement.classList.remove("dark-mode");
+    } else {
+      linkElement.href = darkModeCSS;
+      bodyElement.classList.add("dark-mode");
+    }
+
+    isDarkMode = !isDarkMode;
+  }
+
+  const modeToggleButton = document.getElementById("dmode");
+  modeToggleButton.addEventListener("click", toggleMode);
+
+  </script>
+  
+</body>
+</html>

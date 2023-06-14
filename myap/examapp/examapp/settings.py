@@ -86,6 +86,14 @@ DATABASES = {
         'PASSWORD': 'arhum123',
         'HOST':'localhost',
         'PORT': '3306',
+    },
+    'forfacultydata': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'questions',
+        'USER': 'root',
+        'PASSWORD': 'arhum123',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -119,6 +127,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+
+LOGIN_URL = 'faculty_questions:login'
 
 
 # Static files (CSS, JavaScript, Images)

@@ -1,14 +1,66 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Question Entry</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'facportalstyle.css'%}">
+
 </head>
 <body>
-    <p>
-        FACULTY PORTAL PAGE
-    </p>
+    
+    <h1>Question Entry</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+    
+       
+        <label for="subject_id">Subject:</label>
+        <select id="subjectDropdown" name="subject_id">
+            {% for subject in subjects %}
+            <option value="{{ subject.id }}">{{ subject.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="concept_id">Concept:</label>
+        <select id="conceptDropdown" name="concept_id">
+
+        </select>
+        
+        
+        <label for="question_text">Question Text:</label>
+        <textarea id="question_text" name="question_text" required></textarea><br>
+
+        <label for="options">Options:</label>
+        <textarea id="options" name="options" required></textarea><br>
+
+        <label for="correct_answer">Correct Answer:</label>
+        <input type="text" id="correct_answer" name="correct_answer" required><br>
+
+        <input type="submit" value="Save">
+    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+$(document).ready(function() {
+  // Handle change event of subject dropdown
+  $('#subjectDropdown').change(function() {
+    // Get the selected subject ID
+    var subjectId = $(this).val();
+
+    // Filter the concepts based on the selected subject
+    var filteredConcepts = concepts.filter(function(concept) {
+      return concept.subject_id == subjectId;
+    });
+
+    // Clear previous options in concepts dropdown
+    $('#conceptDropdown').empty();
+
+    // Add new options based on the filtered concepts
+    $.each(filteredConcepts, function(index, concept) {
+      $('#conceptDropdown').append('<option value="' + concept.id + '">' + concept.name + '</option>');
+    });
+  });
+});
+</script>
+
+
+    </script>
+
 </body>
 </html>

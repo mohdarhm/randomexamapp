@@ -28,7 +28,7 @@
         <h2>Menu</h2>
         <ul>
           <li><a href="{% url 'examportal'%}">Test Portal</a></li>
-          <li><a href="#">Faculty Portal</a></li>
+          <li><a href="{% url 'faculty_questions:portal'%}">Faculty Portal</a></li>
           <li><a href="{% url 'res'%}">Resources</a></li>
           <li><a href="{% url 'about'%}">About</a></li>
         </ul> 
@@ -42,7 +42,7 @@
   function toggleMode() {
     const linkElement = document.getElementById("sex");
     const bodyElement = document.body;
-
+    console.log('naughty boi');
     if (isDarkMode) {
       linkElement.href = "{% static 'debughome.css' %}";
       bodyElement.classList.remove("dark-mode");

@@ -3,14 +3,14 @@
 <head>
     <title>Login</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'faclogin.css' %}">
+    <link rel="stylesheet" href="{% static 'login.css' %}">
 </head>
 <body>
     <div class="container">
         <div class="left-container">
             <div class="background"></div>
             <div class="content">
-                <h2>FACULTLY LOGIN</h2>
+                <h2>STUDENT LOGIN</h2>
                 <br>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 {% endfor %}
             </p>
             {% endif %}
-            <form method="POST" action="{% url 'faculty_questions:login' %}">
+            <form method="POST" action="{% url 'student-login' %}">
                 {% csrf_token %}
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required><br>

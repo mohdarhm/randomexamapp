@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+from socket import gethostname, gethostbyname 
+from . import database_router
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,10 +28,9 @@ SECRET_KEY = 'django-insecure-z0xc5j4zoubs#t8ra3)sky=xzp=m3w8s5l&%+f73*&ngrpoz&m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()), 'localhost' ]
 
-
-
+    
 # Application definition
 
 INSTALLED_APPS = [
@@ -80,22 +82,27 @@ STATICFILES_DIRS = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mysql.connector.django',
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'questions',
         'USER': 'root',
         'PASSWORD': 'arhum123',
         'HOST':'localhost',
         'PORT': '3306',
     },
-    'forfacultydata': {
+    'auth_db': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'questions',
+        'NAME': 'djanoauth',  # Name of the authentication database
         'USER': 'root',
         'PASSWORD': 'arhum123',
         'HOST': 'localhost',
         'PORT': '3306',
     }
 }
+AUTHENTICATION_BACKENDS = [
+    ('django.contrib.auth.backends.ModelBackend'),
+]
+
+DATABASE_ROUTERS = ['examapp.database_router.AuthRouter']
 
 
 # Password validation

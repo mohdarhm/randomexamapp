@@ -1,15 +1,24 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import mysql.connector as mc
+from django.urls import reverse
+from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def home(request):
+    if not request.user.is_authenticated:
+        # User is not authenticated, redirect to the student login page
+        return redirect(reverse('student-login'))  # Adjust 'student-login' to the actual URL name of the student login page
+
+    # User is authenticated, continue with the logic to retrieve questions
     connection = mc.connect(
         host='localhost',
         user='root',
         password='arhum123',
         database='questions'
     )
-    
-    # Create a cursor to execute queries
+     # Create a cursor to execute queries
     cursor = connection.cursor()
     
     cursor.execute('SELECT * FROM QUESTION ORDER BY RAND() LIMIT 15')
@@ -30,6 +39,8 @@ def home(request):
         # Add the question data to the list
         questions.append(question_data)
 
+    # Rest of the logic to retrieve questions and process data...
+
     # Close the cursor and database connection
     cursor.close()
     connection.close()
@@ -38,8 +49,7 @@ def home(request):
     context = {
         'questions': questions,
     }
-    return render (request,"test.html",context)
-
+    return render(request, 'test.html', context)
 
 def actualhome(request):
     return render (request, "mainhomepage.html")
@@ -49,15 +59,35 @@ def actualhome(request):
 def debughome(request):
     return render (request, "debughome.html")
 
-
-
-def facultyportal(request):
-    return render (request, "facultyportal.html")
-
-
+    
 def aboutme(request):
     return render (request, "about.html")
 
 def resource(request):
     return render (request, "resources.html")
+
+@login_required(login_url='student-login')
+def student_redirection_view(request):
+    return redirect('home')
+
+def student_login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            # User credentials are valid, log in the user
+            if  user.groups.filter(name="Students").exists():
+                login(request, user)
+                return redirect('examportal')  # Redirect to the examportal page after successful login
+            else:  
+                messages.error(request, 'Faculties cannot access the resource requested.')
+                return redirect('student-login')
+        else:
+            # Invalid username or password
+            messages.error(request, 'Invalid username or password. Also note that faculties wont be able to access the site.')
+
+    return render(request, 'studentlogin.html')
 

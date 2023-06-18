@@ -1,4 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.auth.models import Permission
+
+
+
 
 class Subject(models.Model):
     name = models.CharField(max_length=255)
@@ -18,3 +23,4 @@ class Concept(models.Model):
 
     class Meta:
         db_table = 'concept'
+

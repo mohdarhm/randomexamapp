@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 # from django.views.generic import TemplateView
 # from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Concept, Subject
@@ -9,7 +9,6 @@ from django.contrib.auth import authenticate, login
 
 
 # Create your views here.
-
 def login_view(request):
     # Logic for rendering the login page
     if request.method=='POST':
@@ -19,7 +18,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            if  user.groups.filter(name="Faculties").exists():
+            if  user    .groups.filter(name="Faculties").exists():
                 login(request, user)
                 return redirect('faculty_questions:portal')  # Redirect to the examportal page after successful login
             else:  
@@ -36,7 +35,7 @@ def login_view(request):
 
 @login_required
 # uncomment this line when login page is ready.
-
+@user_passes_test(lambda u: u.groups.filter(name='Faculties').exists(), login_url=None)
 def portal_view(request):
     subjects = Subject.objects.all()
 

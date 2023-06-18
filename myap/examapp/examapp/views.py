@@ -3,9 +3,10 @@ import mysql.connector as mc
 from django.urls import reverse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required,user_passes_test
 
 # Create your views here.
+@user_passes_test(lambda u: u.groups.filter(name='Students').exists(), login_url='student-login')
 def home(request):
     if not request.user.is_authenticated:
         # User is not authenticated, redirect to the student login page
@@ -70,6 +71,8 @@ def resource(request):
 def student_redirection_view(request):
     return redirect('home')
 
+
+
 def student_login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -87,7 +90,7 @@ def student_login_view(request):
                 return redirect('student-login')
         else:
             # Invalid username or password
-            messages.error(request, 'Invalid username or password. Also note that faculties wont be able to access the site.')
+            messages.error(request, 'Invalid username or password.')
 
     return render(request, 'studentlogin.html')
 

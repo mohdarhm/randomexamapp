@@ -19,7 +19,7 @@ V0.5.1 -- initial build 2-14/6/23
 
 V0.7 --initial Build 2 18/6/23
 
--login pages for both faculties and students
+-{login pages, sessions, authentication, login} setup for both faculties and students
 
 v0.7.1 
 

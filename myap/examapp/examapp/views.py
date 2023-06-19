@@ -14,7 +14,7 @@ def home(request):
 
     # User is authenticated, continue with the logic to retrieve questions
     connection = mc.connect(
-        host='localhost',
+        host='34.93.183.253',
         user='root',
         password='arhum123',
         database='questions'
@@ -22,7 +22,7 @@ def home(request):
      # Create a cursor to execute queries
     cursor = connection.cursor()
     
-    cursor.execute('SELECT * FROM QUESTION ORDER BY RAND() LIMIT 15')
+    cursor.execute('SELECT * FROM question ORDER BY RAND() LIMIT 15')
     rq=cursor.fetchall()
     questions = []
 

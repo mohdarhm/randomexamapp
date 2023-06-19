@@ -1,0 +1,15 @@
+runtime: python311
+entrypoint: gunicorn -b :$PORT examapp.wsgi
+
+env_variables:
+  DJANGO_SETTINGS_MODULE: "examapp.settings_cloud"
+  # Add other environment variables if required
+
+handlers:
+- url: /static
+  static_dir: static/
+- url: /.*
+  script: auto
+
+runtime_config:
+  python_version: 3.11

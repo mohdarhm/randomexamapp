@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-z0xc5j4zoubs#t8ra3)sky=xzp=m3w8s5l&%+f73*&ngrpoz&m
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()), 'localhost','eng-braid-383808.el.r.appspot.com']
+ALLOWED_HOSTS = [ gethostname(), gethostbyname(gethostname()), 'localhost', 'eng-braid-383808.el.r.appspot.com']
 
     
 # Application definition
@@ -86,7 +86,7 @@ DATABASES = {
         'NAME': 'questions',
         'USER': 'root',
         'PASSWORD': 'arhum123',
-        'HOST':'localhost',
+        'HOST':'34.93.183.253',
         'PORT': '3306',
     },
     'auth_db': {
@@ -94,7 +94,7 @@ DATABASES = {
         'NAME': 'djanoauth',  # Name of the authentication database
         'USER': 'root',
         'PASSWORD': 'arhum123',
-        'HOST': 'localhost',
+        'HOST': '34.93.183.253',
         'PORT': '3306',
     }
 }

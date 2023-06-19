@@ -24,3 +24,7 @@ V0.7 --initial Build 2 18/6/23
 v0.7.1 
 
 -bug fixes with login logic
+
+v0.8 --initial build 3 19/6/23
+
+--added app.yaml, requirements.txt files for GAE deployment. A seperate settings.py will be used, which is also uploaded.

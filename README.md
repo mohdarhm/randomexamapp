@@ -1,7 +1,7 @@
 # randomexamapp
 [OVERVIEW]
 
-This webapp aims to tackle unethical copying in an examination by completely randomising the question paper using a central database.
+This webapp aims to tackle unethical copying in an examination by completely randomising the question paper using a central database. the question can have various flags such as difficulty levels and hence can be fetched in a manner that obeys certain constraints (say out of 15 questions 3 are very hard, rest are normal, etc).
 
 Frontend= HTML/CSS/Javascript;
 Backend DB= relational, MySQL;

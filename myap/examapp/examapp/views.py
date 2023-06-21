@@ -4,6 +4,67 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required,user_passes_test
+from faculty_questions.models import Question
+
+
+def result_summary2(request):
+    if request.method == 'POST':
+        # Retrieve the POST data
+        post_data = request.POST
+        
+        # Display the POST data
+        context = {'post_data': post_data}
+        return render(request, 'debug.html', context)
+    
+    return render(request, 'debug.html')
+
+
+
+
+def result_summary(request):
+    if not request.user.is_authenticated:
+        return redirect(reverse('student-login'))
+
+    # Retrieve the submitted form data
+    submitted_data = request.POST
+
+    # Retrieve the question IDs from the submitted form data
+    question_ids = [int(key) for key in submitted_data.keys() if key.isnumeric()]
+
+    # Retrieve the corresponding questions from the database
+    questions = Question.objects.filter(id__in=question_ids)
+
+    # Process each question and compare with the submitted data
+    result_data = []
+    total_score = 0
+
+    for question in questions:
+        question_text = question.question_text
+        selected_option = submitted_data.get(str(question.id))
+        correct_answer = question.correct_answer.split(') ', 1)[1]
+        # Check if the selected option matches the correct answer
+        is_correct = selected_option == correct_answer
+
+        # Calculate the score based on correctness
+        score = 1 if is_correct else 0
+        total_score += score
+
+        # Prepare the result data for each question
+        result_data.append({
+            'question': question_text,
+            'selected_option': selected_option,
+            'correct_answer': question.correct_answer,
+            'is_correct': is_correct
+        })
+
+    # Pass the result data and total score to the template
+    context = {
+        'result_data': result_data,
+        'total_score': total_score,
+        'total_possbile': len(questions)
+    }
+
+    return render(request, 'result_summary.html', context)
 
 # Create your views here.
 @user_passes_test(lambda u: u.groups.filter(name='Students').exists(), login_url='student-login')
@@ -22,7 +83,7 @@ def home(request):
      # Create a cursor to execute queries
     cursor = connection.cursor()
     
-    cursor.execute('SELECT * FROM question ORDER BY RAND() LIMIT 15')
+    cursor.execute('SELECT * FROM question ORDER BY RAND() LIMIT 3')
     rq=cursor.fetchall()
     questions = []
 
@@ -31,12 +92,13 @@ def home(request):
         # Split the options string into a list
         options = random_question[4].split(',')
         options = [option.split(') ')[1] for option in options]
+        qid=random_question[0]
         # Create a dictionary for each question and options
         question_data = {
             'question_text': random_question[3],
             'options': options,
+            'id': qid,
         }
-
         # Add the question data to the list
         questions.append(question_data)
 

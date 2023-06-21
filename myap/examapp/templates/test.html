@@ -10,34 +10,38 @@
   
   <div class="container">
     <div class="questions-container">
-    <h1>SUIIIIIIIIIIIII</h1>
+      <h1>SUIIIIIIIIIIIII</h1>
     
-    <div class="progress-indicator">Progress: <span id="current-progress">0</span>/<span id="total-questions">0</span></div>
+      <div class="progress-indicator">Progress: <span id="current-progress">0</span>/<span id="total-questions">0</span></div>
 
-    <form id="exam-form">
-      {% for question in questions %}
-      <div class="question">
+      <form id="exam-form" action="{% url 'result_summary' %}" method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+       
+        <div class="question">
           <h2>{{ question.question_text }}</h2>
-      
-      <div class="options">
-          <form>
-              {% for option in question.options %}
-              <label for="{{ option }}"><input type="radio" id="{{ option }}" name="{{ question.question_text }}" value="{{ option }}">{{ option }}</label>  
-             <br>
-              {% endfor %}
-          </form>
-      </div>
-    </div>
-  
-  {% endfor %}
-  
+        
+          <div class="options">
+            {% for option in question.options %}
+            <label for="{{ option }}">
+              <input type="radio" id="{{ option }}" name="{{ question.id }}" value="{{ option }}">{{ option }}
+            </label>
+            <br>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </form>
 
-    <button class="btn" id="btn">Submit</button>
-  </div>
+        <button class="btn" id="btn" type="submit">Submit</button>
+    </div>
+    </div>
+
   
-    <!-- Questions -->
-    <!-- Submit button -->
-  </div>
   <script {% load static %} src="{% static 'script.js' %}"></script>
+</body>
+
+
+
 </body>
 </html>

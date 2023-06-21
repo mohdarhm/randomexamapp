@@ -27,4 +27,5 @@ urlpatterns = [
     path('about/',views.aboutme, name='about'),
     path('res/',views.resource, name='res'),
     path('faculty/', include('faculty_questions.urls')),
+    path('result_summary', views.result_summary, name='result_summary'),
 ]

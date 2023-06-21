@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const menuToggle = document.getElementById("expand-button");
+    const menuToggle = document.getElementById("btn");
     const menuModal = document.getElementById("menu-modal");
   
     menuToggle.addEventListener("click", function() {

@@ -24,3 +24,20 @@ class Concept(models.Model):
     class Meta:
         db_table = 'concept'
 
+
+
+class Question(models.Model):
+  
+
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    concept = models.ForeignKey(Concept, on_delete=models.CASCADE)
+    question_text = models.TextField()
+    options = models.TextField()
+    correct_answer = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'question'
+        app_label= 'faculty_questions'
+    def __str__(self):
+        return self.question_text
+    

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result Summary</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'resultstyle.css' %}">
+</head>
+<body>
+    <h1>Result Summary</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Question</th>
+                <th>Selected Option</th>
+                <th>Correct Answer</th>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in result_data %}
+            <tr>
+                <td>{{ item.question }}</td>
+                <td>{{ item.selected_option }}</td>
+                <td>{{ item.correct_answer }}</td>
+                <td class="{% if item.is_correct %}right{% else %}wrong{% endif %}">{% if item.is_correct %}Right{% else %}Wrong{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p>Total Score: {{ total_score }}/{{ num_questions_received }}</p>
+</body>
+</html>

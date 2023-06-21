@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debugging View</title>
+</head>
+<body>
+    {% if post_data %}
+    <h1>POST Data:</h1>
+    <pre>{{ post_data }}</pre>
+    {% else %}
+    <h1>No POST Data received</h1>
+    {% endif %}
+</body>
+</html>

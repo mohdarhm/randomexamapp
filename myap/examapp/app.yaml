@@ -3,7 +3,6 @@ entrypoint: gunicorn -b :$PORT examapp.wsgi
 
 env_variables:
   DJANGO_SETTINGS_MODULE: "examapp.settings_cloud"
-  # Add other environment variables if required
 
 handlers:
 - url: /static
